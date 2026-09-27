@@ -1,8 +1,9 @@
 import json
 import os
-from anthropic import Anthropic
+from groq import Groq
 
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+MODEL = "llama-3.3-70b-versatile"
 
 SYSTEM_PROMPT = """You are Wren, a regulatory triage assistant. You are given a business description
 and a fixed list of candidate regulations (each with an id). Your job:
@@ -56,15 +57,15 @@ def generate_breakdown(business_description: str, candidate_regulations: list) -
         }
     )
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
+    response = client.chat.completions.create(
+        model=MODEL,
         max_tokens=2000,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_content}],
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
     )
-    text = "".join(
-        block.text for block in response.content if block.type == "text"
-    ).strip()
+    text = response.choices[0].message.content.strip()
     text = text.replace("```json", "").replace("```", "").strip()
     try:
         parsed = json.loads(text)
