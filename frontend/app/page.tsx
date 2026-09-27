@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import RegulationCard from "../../../components/RegulationCard";
-import ChecklistItem from "../../../components/ChecklistItem";
+import RegulationCard from "../components/RegulationCard";
+import ChecklistItem from "../components/ChecklistItem";
 import { getChecklist, type AnalyzeResponse } from "../../../lib/api";
 
 export default function ResultsPage({ params }: { params: { id: string } }) {
