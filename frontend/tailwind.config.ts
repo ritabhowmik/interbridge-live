@@ -4,22 +4,21 @@ const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
-     colors: {
-     base: "#F5F5F4",        // was #0B0A10
-     surface: "rgba(0,0,0,0.03)",     // was rgba(255,255,255,0.05)
-     border: "rgba(0,0,0,0.08)",      // was rgba(255,255,255,0.08)
-     accentFrom: "#E8A6D9",
-     accentTo: "#8C6FE0",
-     blocker: "#C24A4A",
-     conditional: "#B08A2E",
-     informational: "#3A7CA5",
-    },
-      fontFamily: {
-        display: ["'EB Garamond'", "serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
+      colors: {
+        base: "#B98B5E",       // deep warm brown, page background
+        card: "#DEC49A",       // latte beige, flat card background
+        ink: "#3E2B22",        // dark brown, all text
+        cream: "#F5EDE3",      // light text on dark/coffee fills
+        accentFrom: "#C9A66B", // light brown
+        accentTo: "#6B4226",   // deep coffee brown, primary CTA fill
+        cherry: "#8C2F39",     // reserved for the "blocker" severity signal only
+        blocker: "#8C2F39",
+        conditional: "#7A5230",
+        informational: "#A67C52",
       },
-      backdropBlur: {
-        glass: "20px",
+      fontFamily: {
+        display: ["'Fraunces'", "serif"],
+        body: ["'Fraunces'", "serif"],
       },
     },
   },
