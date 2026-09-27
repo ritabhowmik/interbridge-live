@@ -1,8 +1,9 @@
 import json
 import os
-from anthropic import Anthropic
+from groq import Groq
 
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+MODEL = "llama-3.3-70b-versatile"
 
 SECTOR_TAXONOMY = [
     "alcohol_production",
@@ -22,15 +23,15 @@ If the business description is too vague or doesn't clearly fit any sector, set 
 
 
 def classify_business(business_description: str) -> dict:
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
+    response = client.chat.completions.create(
+        model=MODEL,
         max_tokens=200,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": business_description}],
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": business_description},
+        ],
     )
-    text = "".join(
-        block.text for block in response.content if block.type == "text"
-    ).strip()
+    text = response.choices[0].message.content.strip()
     text = text.replace("```json", "").replace("```", "").strip()
     try:
         parsed = json.loads(text)
