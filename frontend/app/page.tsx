@@ -31,8 +31,9 @@ export default function Home() {
   return (
     <main className="space-y-8">
       <div className="text-center space-y-3">
-        <h1 className="font-display text-4xl gradient-text">interbridge</h1>
-        <p className="text-white/60 max-w-lg mx-auto">
+        <img src="/logo-mark.png" alt="interbridge" className="h-14 mx-auto mb-1" />
+        <h1 className="font-display text-4xl text-ink">interbridge</h1>
+        <p className="text-ink/60 max-w-lg mx-auto">
           find out which provincial regulations are actually blocking your
           expansion, in plain language, with a checklist to fix it
         </p>
